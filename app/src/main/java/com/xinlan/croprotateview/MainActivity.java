@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         mRotateSeek = (SeekBar) findViewById(R.id.seekBar);
         mCropView = (CropRotateView) findViewById(R.id.crop_view);
         //Bitmap srcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.demo);
-        Bitmap srcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.demo3);
+        Bitmap srcBitmap = BitmapFactory.decodeResource(getResources(),R.drawable.demo);
 
         mCropView.setBitmap(srcBitmap);
 

@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 /**
@@ -98,6 +99,29 @@ public class CropRotateView extends View {
         mSrcBit = bit;
         mSrcRect.set(0,0,mSrcBit.getWidth(),mSrcBit.getHeight());
         invalidate();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean ret = super.onTouchEvent(event);// 是否向下传递事件标志 true为消耗
+        int action = event.getAction();
+        float x = event.getX();
+        float y = event.getY();
+
+        switch(action){
+            case MotionEvent.ACTION_DOWN:
+                System.out.println("ACTION_DOWN");
+                ret = true;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                System.out.println("ACTION_MOVE");
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                System.out.println("ACTION_UP");
+                break;
+        }
+        return ret;
     }
 
     /**
@@ -204,7 +228,7 @@ public class CropRotateView extends View {
                 retScale = scaleWidth;
             }
             canvas.scale(retScale,retScale , getWidth()>>1,getHeight() >>1);
-            System.out.println("scaleWidth = "+scaleWidth+"   scaleHeight = "+scaleHeight);
+            //System.out.println("scaleWidth = "+scaleWidth+"   scaleHeight = "+scaleHeight);
         }else if(mCropType == RotateCropType.SCALE){
             tempMatrix.reset();
             tempRect.set(originRect);
@@ -221,7 +245,7 @@ public class CropRotateView extends View {
                 retScale = scaleWidth;
             }
             canvas.scale(retScale,retScale , getWidth()>>1,getHeight() >>1);
-            System.out.println("scaleWidth = "+scaleWidth+"   scaleHeight = "+scaleHeight);
+            //System.out.println("scaleWidth = "+scaleWidth+"   scaleHeight = "+scaleHeight);
         }
 
         //mCropBoundRect.set((int)tempRect.left,tempRect.top , tempRect.right , tempRect.bottom);
